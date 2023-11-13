@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -13,22 +14,20 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
+@Table(name = "app_user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "USERNAME")
-    private String Username;
+    private String username;
 
-    @Column(name = "ADDRESS")
     private String address;
 
-    @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "PASSWORD")
-    private Password password;
+    @OneToMany(mappedBy = "user")
+    private List<Password> passwords;
 
 }

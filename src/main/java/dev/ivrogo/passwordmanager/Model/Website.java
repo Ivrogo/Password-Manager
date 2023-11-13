@@ -6,27 +6,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class Password {
+public class Website {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private String name;
 
-    @Column(name = "PASSWORD")
-    private String password;
-
-    @ManyToOne
-    @JoinColumn(name = "website_id")
-    private Website website;
-
+    @OneToMany(mappedBy = "website")
+    private List<Password> passwords;
 }
